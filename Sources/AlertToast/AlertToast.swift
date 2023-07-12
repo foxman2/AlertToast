@@ -18,7 +18,7 @@ fileprivate struct AnimatedCheckmark: View {
     var color: Color = .black
     
     ///Checkmark color
-    var size: Int = 50
+    var size: Int = 25
     
     var height: CGFloat {
         return CGFloat(size)
@@ -53,7 +53,7 @@ fileprivate struct AnimatedXmark: View {
     var color: Color = .black
     
     ///xmark size
-    var size: Int = 50
+    var size: Int = 25
     
     var height: CGFloat {
         return CGFloat(size)
@@ -332,15 +332,10 @@ public struct AlertToast: View{
         VStack{
             switch type{
             case .complete(let color):
-                Spacer()
                 AnimatedCheckmark(color: color)
-                Spacer()
             case .error(let color):
-                Spacer()
                 AnimatedXmark(color: color)
-                Spacer()
             case .systemImage(let name, let color):
-                Spacer()
                 Image(systemName: name)
                     .renderingMode(.template)
                     .resizable()
@@ -348,16 +343,13 @@ public struct AlertToast: View{
                     .scaledToFit()
                     .foregroundColor(color)
                     .padding(.bottom)
-                Spacer()
             case .image(let name, let color):
-                Spacer()
                 Image(name)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .scaledToFit()
                     .foregroundColor(color)
                     .padding(.bottom)
-                Spacer()
             case .loading:
                 ActivityIndicator()
             case .regular:
@@ -381,9 +373,9 @@ public struct AlertToast: View{
             }
         }
         .padding()
-        .withFrame(type != .regular && type != .loading)
         .alertBackground(style?.backgroundColor ?? nil)
         .cornerRadius(10)
+        .withFrame(type != .regular && type != .loading)
     }
     
     ///Body init determine by `displayMode`
@@ -704,5 +696,12 @@ public extension View{
                 onChange(value)
             }
         }
+    }
+}
+
+struct AlertToast_Preview: PreviewProvider {
+    static var previews: some View {
+        AlertToast(displayMode: .alert, type: .complete(.red), title: "AlertToas")
+        
     }
 }

@@ -35,7 +35,9 @@ public struct BlurView: UIViewRepresentable {
     public typealias UIViewType = UIVisualEffectView
     
     public func makeUIView(context: Context) -> UIVisualEffectView {
-        return UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+        view.backgroundColor = .lightGray
+        return view
     }
     
     public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
